@@ -1,0 +1,599 @@
+{
+    "layout": {
+        "title": "布局",
+        "list": [
+            {
+                "name": "Row",
+                "image": "https://img.alicdn.com/tfs/TB1US1GQpXXXXXQXVXXXXXXXXXX-444-120.png",
+                "desc": "行",
+                "map": "Grid.Row",
+                "children": [
+                    {
+                        "component": "Col"
+                    }
+                ],
+                "defaults": {
+                    "type": "flex"
+                },
+                "key": "Row"
+            },
+            {
+                "name": "Col",
+                "image": "https://img.alicdn.com/tfs/TB1i9GPQpXXXXcHXpXXXXXXXXXX-444-120.png",
+                "desc": "列",
+                "map": "Grid.Col",
+                "defaults": {}
+            }
+        ]
+    },
+    "form": {
+        "title": "表单",
+        "list": [
+            {
+                "name": "Form",
+                "image": "https://img.alicdn.com/tfs/TB171J6gOLaK1RjSZFxXXamPFXa-1036-872.png",
+                "desc": "表单",
+                "children": [
+                    {
+                        "component": "FormItem",
+                        "props": {
+                            "label": "文案"
+                        },
+                        "children": [
+                            {
+                                "component": "Input",
+                                "props": {}
+                            }
+                        ]
+                    }
+                ],
+                "defaults": {
+                    "size": "medium",
+                    "direction": "ver",
+                    "labelAlign": "left",
+                    "labelTextAlign": "left"
+                }
+            },
+            {
+                "name": "FormItem",
+                "image": "",
+                "desc": "字段",
+                "map": "Form.Item",
+                "props": {
+                    "label": "文案"
+                },
+                "children": [
+                    {
+                        "component": "Input",
+                        "props": {}
+                    }
+                ],
+                "defaults": {},
+                "key": "FormItem"
+            },
+            {
+                "name": "Input",
+                "image": "https://img.alicdn.com/tfs/TB1h1VthwHqK1RjSZFEXXcGMXXa-300-56.png",
+                "desc": "输入框",
+                "defaults": {
+                    "size": "medium"
+                }
+            },
+            {
+                "name": "Button",
+                "image": "https://img.alicdn.com/tfs/TB1zXnJu3HqK1RjSZFkXXX.WFXa-150-54.png",
+                "desc": "按钮",
+                "props": {
+                    "data_text": "按钮"
+                },
+                "defaults": {}
+            },
+            {
+                "name": "ButtonGroup",
+                "image": "https://img.alicdn.com/tfs/TB18MTzu4TpK1RjSZR0XXbEwXXa-150-50.png",
+                "desc": "按钮组",
+                "map": "Button.Group",
+                "children": [
+                    {
+                        "component": "Button",
+                        "props": {}
+                    }
+                ],
+                "defaults": {}
+            },
+            {
+                "name": "Select",
+                "image": "https://img.alicdn.com/tfs/TB1TsfJu7voK1RjSZFwXXciCFXa-150-50.png",
+                "desc": "下拉框",
+                "defaults": {
+                    "size": "medium"
+                }
+            },
+            {
+                "name": "SelectOption",
+                "image": "https://img.alicdn.com/tfs/TB1EbDGuVzqK1RjSZFoXXbfcXXa-120-113.png",
+                "desc": "下拉框选项",
+                "map": "Select.Option",
+                "defaults": {}
+            },
+            {
+                "name": "Radio",
+                "image": "https://img.alicdn.com/tfs/TB105U.mkvoK1RjSZFwXXciCFXa-136-42.png",
+                "desc": "单选框",
+                "defaults": {}
+            },
+            {
+                "name": "RadioGroup",
+                "image": "https://img.alicdn.com/tfs/TB1aBM8mgHqK1RjSZJnXXbNLpXa-408-42.png",
+                "desc": "单选组",
+                "map": "Radio.Group",
+                "defaults": {
+                    "size": "medium"
+                }
+            },
+            {
+                "name": "NumberPicker",
+                "image": "https://img.alicdn.com/tfs/TB1XpzGuYvpK1RjSZFqXXcXUVXa-150-47.png",
+                "desc": "数字",
+                "defaults": {
+                    "type": "normal"
+                }
+            },
+            {
+                "name": "DatePicker",
+                "image": "https://img.alicdn.com/tfs/TB1oqxOurArBKNjSZFLXXc_dVXa-320-56.png",
+                "desc": "日期选择",
+                "defaults": {
+                    "size": "medium"
+                }
+            },
+            {
+                "name": "Hidden",
+                "image": "",
+                "desc": "隐藏域",
+                "defaults": {}
+            },
+            {
+                "name": "Switch",
+                "image": "https://img.alicdn.com/tfs/TB1OSzKu3HqK1RjSZFkXXX.WFXa-150-44.png",
+                "desc": "开关",
+                "defaults": {
+                    "size": "medium"
+                }
+            },
+            {
+                "name": "Checkbox",
+                "image": "https://img.alicdn.com/tfs/TB16r26u5LaK1RjSZFxXXamPFXa-170-36.png",
+                "desc": "多选框",
+                "defaults": {}
+            },
+            {
+                "name": "CheckboxGroup",
+                "image": "https://img.alicdn.com/tfs/TB1pWNshwTqK1RjSZPhXXXfOFXa-408-42.png",
+                "desc": "多选组",
+                "map": "Checkbox.Group",
+                "defaults": {}
+            },
+            {
+                "name": "Range",
+                "image": "https://img.alicdn.com/tfs/TB1QsejucUrBKNjSZPxXXX00pXa-400-24.png",
+                "desc": "数值区段",
+                "defaults": {}
+            },
+            {
+                "name": "Search",
+                "image": "https://img.alicdn.com/tfs/TB12vzIu9zqK1RjSZFpXXakSXXa-380-66.png",
+                "desc": "搜索框",
+                "defaults": {
+                    "size": "medium",
+                    "type": "normal",
+                    "searchText": "搜索"
+                }
+            }
+        ]
+    },
+    "html": {
+        "title": "html",
+        "list": [
+            {
+                "name": "div",
+                "image": "https://img.alicdn.com/tfs/TB1F4WLQpXXXXbTXFXXXXXXXXXX-444-120.png",
+                "desc": "层容器",
+                "defaults": {}
+            },
+            {
+                "name": "a",
+                "image": "https://img.alicdn.com/tfs/TB14thhoXYqK1RjSZLeXXbXppXa-56-42.png",
+                "desc": "链接",
+                "children": [
+                    {
+                        "component": "span"
+                    }
+                ],
+                "defaults": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "name": "img",
+                "image": "https://img.alicdn.com/tfs/TB1HdTGu9zqK1RjSZFpXXakSXXa-188-62.png",
+                "desc": "图片",
+                "defaults": {}
+            },
+            {
+                "name": "span",
+                "image": "",
+                "desc": "文案",
+                "defaults": {}
+            },
+            {
+                "name": "p",
+                "image": "",
+                "desc": "段落",
+                "defaults": {}
+            },
+            {
+                "name": "h1",
+                "image": "",
+                "desc": "标题 1",
+                "defaults": {}
+            },
+            {
+                "name": "h2",
+                "image": "",
+                "desc": "标题 2",
+                "defaults": {}
+            },
+            {
+                "name": "h3",
+                "image": "",
+                "desc": "标题 3",
+                "defaults": {}
+            },
+            {
+                "name": "ul",
+                "image": "",
+                "desc": "列表",
+                "defaults": {}
+            },
+            {
+                "name": "li",
+                "image": "",
+                "desc": "列表项",
+                "defaults": {}
+            },
+            {
+                "name": "iframe",
+                "image": "",
+                "desc": "iframe",
+                "defaults": {
+                    "scrolling": "no",
+                    "frameborder": "0"
+                }
+            },
+            {
+                "name": "Link",
+                "image": "",
+                "desc": "站内链接",
+                "defaults": {}
+            }
+        ]
+    },
+    "syntax": {
+        "title": "语法",
+        "list": [
+            {
+                "name": "Yes",
+                "image": "",
+                "desc": "存在变量",
+                "defaults": {}
+            },
+            {
+                "name": "No",
+                "image": "",
+                "desc": "不存在变量",
+                "defaults": {}
+            },
+            {
+                "name": "Iterator",
+                "image": "",
+                "desc": "迭代器",
+                "defaults": {}
+            },
+            {
+                "name": "PagePlaceholder",
+                "image": "",
+                "desc": "母版内容占位",
+                "defaults": {}
+            },
+            {
+                "name": "Io",
+                "image": "",
+                "desc": "服务绑定",
+                "defaults": {}
+            }
+        ]
+    },
+    "simpleUi": {
+        "title": "无交互 UI",
+        "list": [
+            {
+                "name": "Title",
+                "image": "https://img.alicdn.com/tfs/TB1s_vBu4TpK1RjSZR0XXbEwXXa-154-43.png",
+                "desc": "标题",
+                "defaults": {}
+            },
+            {
+                "name": "Icon",
+                "image": "https://img.alicdn.com/tfs/TB1GObBu3DqK1RjSZSyXXaxEVXa-226-80.png",
+                "desc": "图标",
+                "defaults": {}
+            },
+            {
+                "name": "Card",
+                "image": "https://img.alicdn.com/tfs/TB11EtAupooBKNjSZFPXXXa2XXa-300-414.png",
+                "desc": "卡片",
+                "defaults": {}
+            },
+            {
+                "name": "Notice",
+                "image": "https://img.alicdn.com/tfs/TB1HKfHu9zqK1RjSZFpXXakSXXa-264-74.png",
+                "desc": "公告",
+                "defaults": {}
+            },
+            {
+                "name": "Breadcrumb",
+                "image": "https://img.alicdn.com/tfs/TB1II6xjNTpK1RjSZFMXXbG_VXa-534-32.png",
+                "desc": "面包屑",
+                "defaults": {}
+            },
+            {
+                "name": "BreadcrumbItem",
+                "image": "",
+                "desc": "面包屑 item",
+                "map": "Breadcrumb.Item",
+                "defaults": {}
+            },
+            {
+                "name": "Progress",
+                "image": "https://img.alicdn.com/tfs/TB19mrwu6DpK1RjSZFrXXa78VXa-129-132.png",
+                "desc": "进度条",
+                "defaults": {
+                    "type": "normal",
+                    "size": "medium",
+                    "shape": "line"
+                }
+            },
+            {
+                "name": "Tag",
+                "image": "https://img.alicdn.com/tfs/TB1.MJfupkoBKNjSZFEXXbrEVXa-164-56.png",
+                "desc": "标签",
+                "defaults": {}
+            }
+        ]
+    },
+    "ui": {
+        "title": "复杂交互 UI",
+        "list": [
+            {
+                "name": "Table",
+                "image": "https://img.alicdn.com/tfs/TB1FpTVrtknBKNjSZKPXXX6OFXa-424-271.png",
+                "desc": "表格",
+                "children": [
+                    {
+                        "component": "TableColumn"
+                    },
+                    {
+                        "component": "TableColumn"
+                    },
+                    {
+                        "component": "TableColumn"
+                    }
+                ],
+                "defaults": {}
+            },
+            {
+                "name": "TableColumn",
+                "image": "",
+                "desc": "表格列",
+                "map": "Table.Column",
+                "defaults": {}
+            },
+            {
+                "name": "Pagination",
+                "image": "https://img.alicdn.com/tfs/TB1cOx3sVzqK1RjSZFvXXcB7VXa-1168-56.png",
+                "desc": "分页",
+                "defaults": {
+                    "size": "medium"
+                }
+            },
+            {
+                "name": "Dialog",
+                "image": "https://img.alicdn.com/tfs/TB1AycTotknBKNjSZKPXXX6OFXa-323-229.png",
+                "desc": "对话框",
+                "defaults": {}
+            },
+            {
+                "name": "Feedback",
+                "image": "",
+                "desc": "反馈",
+                "defaults": {}
+            },
+            {
+                "name": "Accordion",
+                "image": "https://img.alicdn.com/tfs/TB1Kk8OuDmWBKNjSZFBXXXxUFXa-258-266.png",
+                "desc": "手风琴",
+                "defaults": {}
+            },
+            {
+                "name": "AccordionPanel",
+                "image": "",
+                "desc": "手风琴面板",
+                "map": "Accordion.Panel",
+                "defaults": {}
+            },
+            {
+                "name": "Tab",
+                "image": "https://img.alicdn.com/tfs/TB15YC1hhtnkeRjSZSgXXXAuXXa-419-326.png",
+                "desc": "选项卡",
+                "defaults": {
+                    "type": "bar",
+                    "size": "medium",
+                    "triggerType": "click"
+                }
+            },
+            {
+                "name": "TabPane",
+                "image": "",
+                "desc": "选项卡内容",
+                "map": "Tab.TabPane",
+                "defaults": {}
+            },
+            {
+                "name": "Nav",
+                "image": "https://img.alicdn.com/tfs/TB1n56IuYrpK1RjSZTEXXcWAVXa-263-308.png",
+                "desc": "导航",
+                "defaults": {
+                    "type": "normal"
+                }
+            },
+            {
+                "name": "NavItem",
+                "image": "",
+                "desc": "导航 item",
+                "map": "Nav.Item",
+                "children": [
+                    {
+                        "component": "a"
+                    }
+                ],
+                "defaults": {}
+            },
+            {
+                "name": "NavGroup",
+                "image": "",
+                "desc": "导航 组",
+                "map": "Nav.Group",
+                "children": [
+                    {
+                        "component": "NavItem"
+                    }
+                ],
+                "defaults": {}
+            },
+            {
+                "name": "NavSubNav",
+                "image": "",
+                "desc": "子导航",
+                "map": "Nav.SubNav",
+                "defaults": {}
+            },
+            {
+                "name": "TagPicker",
+                "image": "https://img.alicdn.com/tfs/TB1jd4gupkoBKNjSZFEXXbrEVXa-720-248.png",
+                "desc": "属性选择器",
+                "defaults": {}
+            },
+            {
+                "name": "CascaderSelect",
+                "image": "https://img.alicdn.com/tfs/TB1Y.HHu7voK1RjSZFNXXcxMVXa-441-200.png",
+                "desc": "级联选择器",
+                "defaults": {}
+            }
+        ]
+    },
+    "service": {
+        "title": "业务组件",
+        "list": [
+            {
+                "name": "ListItemForSelect",
+                "image": "",
+                "desc": "选品列表项",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForScenes",
+                "image": "",
+                "desc": "场景列表项",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForPageScenes",
+                "image": "",
+                "desc": "场景被引用页面列表项",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForPageSet",
+                "image": "",
+                "desc": "被页面绑定场景设置",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForGroup",
+                "image": "",
+                "desc": "场景分组",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForTimetable",
+                "image": "",
+                "desc": "方案排期",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForTable",
+                "image": "",
+                "desc": "场景绑定方案",
+                "defaults": {}
+            },
+            {
+                "name": "ListLink",
+                "image": "",
+                "desc": "场景绑定被绑定页面",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForPageScenesPutin",
+                "image": "",
+                "desc": "场景被引用页面列表项(投放)",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForPlanTitle",
+                "image": "",
+                "desc": "方案标题",
+                "defaults": {}
+            },
+            {
+                "name": "ListItemForPlanTable",
+                "image": "",
+                "desc": "方案表格",
+                "defaults": {}
+            },
+            {
+                "name": "TableForPlan",
+                "image": "",
+                "desc": "方案列表",
+                "defaults": {}
+            }
+        ]
+    },
+    "chart": {
+        "title": "图表组件",
+        "list": [
+            {
+                "name": "ChartSingleLine",
+                "image": "https://img.alicdn.com/tfs/TB1IN8Ey3TqK1RjSZPhXXXfOFXa-280-173.png",
+                "desc": "单条折线图",
+                "defaults": {}
+            },
+            {
+                "name": "ChartCake",
+                "image": "https://img.alicdn.com/tfs/TB1cLRQyYPpK1RjSZFFXXa5PpXa-466-366.png",
+                "desc": "饼图",
+                "defaults": {}
+            }
+        ]
+    }
+}
