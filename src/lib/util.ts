@@ -25,7 +25,7 @@ export function uniq(arr: any[]) {
 export function pick(object: any, paths: string[]) {
   const obj: any = {};
   for (const path of paths) {
-    if (object[path]) {
+    if (isExist(object[path])) {
       obj[path] = object[path]
     }
   }

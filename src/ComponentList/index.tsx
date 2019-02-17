@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Row, Col, Select  } from 'antd';
+import { Row, Col, Select, Alert  } from 'antd';
 import { ThemeProvider } from 'styled-components';
 // import useInputValue from '@rehooks/input-value';
 // import {
@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components';
 //   TSchemaTreeControlledKeys
 // } from 'ide-tree';
 
-import { debugRender } from '../lib/debug';
+import { debugInteract, debugRender, debugModel } from '../lib/debug';
 import { pick } from '../lib/util';
 import { StyledContainer, StyledFilterWrap, StyledSelect, StyledInput, StyledGroupWrap, StyledItemWrap, StyledItemInfo, StyledItemDesc, StyledItemName, StyledItemImage } from './styles';
 import { AppFactory } from './controller/index';
@@ -70,8 +70,10 @@ export interface IComponentListItem {
 }
 
 export interface IComponentListGroup{
-  [prop: string]: IComponentListItem;
-  
+  [prop: string]: {
+    title: string;
+    list: IComponentListItem[];
+  };
 }
 
 export interface IComponentListProps extends IComponentListEvent{
@@ -90,7 +92,6 @@ export interface IComponentListProps extends IComponentListEvent{
    */
   list?: IComponentListGroup;
 
-  text?: string;
   /**
    * 样式集合，方便外部控制
    */
@@ -100,7 +101,6 @@ export interface IComponentListProps extends IComponentListEvent{
    * 设置主题
    */
   theme?: IComponentListTheme;
-
 };
 
 
@@ -109,6 +109,7 @@ export const DEFAULT_PROPS: IComponentListProps = {
   theme: {
     main: '#25ab68'
   },
+  list: {},
   styles: {
     container: {},
     input:{
@@ -132,23 +133,70 @@ export const ComponentListHOC = (subComponents: ISubComponents) => {
       onSelectItem && onSelectItem(item);
     };
 
-    const [listFromCatagory, setListFromCatagory] = useState(props.list); // 通过类目筛选的
-    const [listFromSearch, setListFromSearch] = useState(null); // 通过搜索获取的结果集
+    const [category, setCategory] = useState(''); // 通过类目筛选的
+    const [inputValue, setInputValue] = useState(''); // 通过搜索获取的结果集
+    
+
+    // 点击切换类别筛选
+    const onChangeCatagory = function(value: string) {
+      setCategory(value);
+    }
+    // 当用户搜索的时候，建议用 debounce 来提升效率
+    const handleSearch = function (ev: any) {
+      setInputValue(ev.target.value);
+    }
+
+    // 自定义 hooks，当 input 或者 select 更改之后，就更改筛选结果集
+    const useFilterResult = (category: string, inputValue: string): IComponentListGroup =>{
+      if(!props.list) return;
+      // 筛选出来的列别范围
+      let selectedCategories: IComponentListGroup = {};
+      if (!!category) {
+        selectedCategories[category] = props.list[category];
+      } else {
+        selectedCategories = props.list;
+      }
+
+      debugInteract('[类别筛选] 通过 select 筛选后：%o', selectedCategories as any);
+
+      // 开始处理 input
+      if (!inputValue) {
+        return selectedCategories;
+      } else {
+        // 获取每组的 keys
+        const groupKeys = Object.keys(selectedCategories);
+        // 构造结果集
+        const searchList: IComponentListGroup = {
+          result: {
+            title: '搜索结果',
+            list: []
+          }
+        };
+
+        groupKeys.map((group: string) => {
+          // 获取当前的 key
+          const curGroup = selectedCategories[group];
+          const { list: childrenList } = curGroup;
+          {
+            childrenList.map((item: IComponentListItem) => {
+              if (new RegExp(inputValue).test(item.desc) || new RegExp(inputValue).test(item.name.toLowerCase())) {
+                searchList.result.list.push(item);
+              }
+            })
+          }
+        });
+        debugInteract('[筛选] 通过 input 筛选后：%o', searchList as any);
+
+        return searchList;
+      }
+    }
+
+    const resultList = useFilterResult(category, inputValue);
+
+    const groupKeys = Object.keys(resultList || {}); // 筛选后的 key
+    const listKeys = Object.keys(list || {}); // 所有的 key
 
   
-    const resultList = listFromSearch || listFromCatagory;
-
-    const groupKeys = Object.keys(resultList); // 筛选后的 key
-    const listKeys = Object.keys(list); // 所有的 key
-
-    const onChangeCatagory = function(value: string) {
-      console.log('value', value);
-    }
-
-    const handleSearch = function (ev: any) {
-      console.log(777, ev.target.value);
-    }
-
     return (
       <ThemeProvider theme={theme}>
         <StyledContainer
@@ -157,6 +205,7 @@ export const ComponentListHOC = (subComponents: ISubComponents) => {
           // ref={this.root}
           className="ide-component-list-container"
         >
+          
           <StyledFilterWrap style={styles.filterWrap}>
             <StyledSelect style={
               styles.select
@@ -171,6 +220,9 @@ export const ComponentListHOC = (subComponents: ISubComponents) => {
             </StyledSelect>
             <StyledInput className="list-input" style={styles.input} placeholder="搜索"  onChange={handleSearch}></StyledInput>
           </StyledFilterWrap>
+          {
+            !props.list && <Alert message="请给组件传入 list 列表" type="error" /> || null
+          }
           {
             groupKeys.map(group => {
               const curGroup = resultList[group];
@@ -223,10 +275,11 @@ export const ComponentListAddStore = (stores: IStoresModel) => {
   });
 
   const ComponentListWithStore = (props: Omit<IComponentListProps, TComponentListControlledKeys>) => {
-    const {/* schemaTree, */ onSelectItem, ...otherProps} = props;
+    const {/* schemaTree, onSelectItem, */ ...otherProps} = props;
     const {/* schemaTree, */ model } = stores;
     const controlledProps = pick(model, CONTROLLED_KEYS);
-    debugRender(`[${stores.id}] rendering`);
+    debugRender(`[${stores.id}] rendering.`);
+    debugModel(`[${stores.id}] controlledProps: %o`, controlledProps);
     return (
       <ComponentListHasSubStore
         // schemaTree={ schemaTree }

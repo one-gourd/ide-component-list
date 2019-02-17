@@ -5,7 +5,7 @@ import { wInfo } from '../../../.storybook/utils';
 import mdPut from './put.md';
 
 import { ComponentListFactory } from '../../../src';
-import { modelPropsGen } from '../../helper';
+import { modelPropsGen, COMP_LIST } from '../../helper';
 
 const { ComponentListWithStore, client } = ComponentListFactory();
 
@@ -65,11 +65,7 @@ storiesOf('API - put', module)
   .addWithJSX('/model/theme 更改 theme', () => {
     return (
       <Row style={styles.demoWrap}>
-        <Col span={24}>
-          <ComponentListWithStore
-            onClick={onClick}
-          />
-        </Col>
+
         <Row type="flex" justify="space-between" align="top">
           <Col span={10} offset={2}>
             <Row>
@@ -89,6 +85,12 @@ storiesOf('API - put', module)
             <div id="info" />
           </Col>
         </Row>
+        <Col span={24}>
+          <ComponentListWithStore
+            list={COMP_LIST}
+            onSelectItem={onClick}
+          />
+        </Col>
       </Row>
     );
   });

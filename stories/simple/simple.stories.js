@@ -5,10 +5,11 @@ import { wInfo } from '../../.storybook/utils';
 import { ComponentList, createModel, ComponentListAddStore } from '../../src/';
 import mdMobx from './simple-mobx.md';
 import mdPlain from './simple-plain.md';
+import { COMP_LIST } from '../helper';
+
 
 const propsNormal = {
-  visible: true,
-  text: ''
+  visible: true
 };
 const propsModel = createModel(propsNormal);
 
@@ -18,9 +19,9 @@ function onClick(value) {
 
 const clickBtn = target => () => {
   if (target && target.setVisible) {
-    target.setText('hello world');
+    target.setVisible(false);
   } else {
-    target.text = 'hello world';
+    target.visible = false;
   }
 };
 
@@ -31,9 +32,9 @@ storiesOf('基础使用', module)
     return (
       <div>
         <button onClick={clickBtn(propsModel)}>
-          更改文案（会响应）
+          更改 visible（会响应）
         </button>
-        <ComponentListWithStore onClick={onClick} />
+        <ComponentListWithStore list={COMP_LIST} onClick={onClick} />
       </div>
     );
   })
@@ -41,8 +42,8 @@ storiesOf('基础使用', module)
   .addWithJSX('普通 props 对象', () => (
     <div>
       <button onClick={clickBtn(propsNormal)}>
-        更改文案（不会响应）
+        更改 visible（不会响应）
       </button>
-      <ComponentList {...propsNormal} onClick={onClick} />
+      <ComponentList list={COMP_LIST} {...propsNormal} onSelectItem={onClick} />
     </div>
   ));

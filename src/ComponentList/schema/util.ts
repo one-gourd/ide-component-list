@@ -8,10 +8,10 @@ import { IComponentListProps, IComponentListModel, ComponentListModel, IStoresMo
  */
 export function createModel(modelObject: IComponentListProps = DEFAULT_PROPS): IComponentListModel {
   const mergedProps = Object.assign({}, DEFAULT_PROPS, modelObject);
-  const { visible, text, theme, styles } = mergedProps;
+  const { visible, theme, styles } = mergedProps;
 
   const model = ComponentListModel.create({
-    visible, text
+    visible
   });
   model.setStyles(styles || {});
   model.setTheme(theme);

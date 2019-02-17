@@ -5,7 +5,7 @@ import { wInfo } from '../../../.storybook/utils';
 import mdGet from './get.md';
 
 import { ComponentListFactory } from '../../../src';
-import { modelPropsGen } from '../../helper';
+import { modelPropsGen, COMP_LIST } from '../../helper';
 
 const {
   ComponentListWithStore: ComponentListWithStore1,
@@ -64,7 +64,7 @@ storiesOf('API - get', module)
           </Col>
         </Row>
         <Col span={24}>
-          <ComponentListWithStore1 onClick={onClick} />
+          <ComponentListWithStore1 list={COMP_LIST} onSelectItem={onClick} />
         </Col>
       </Row>
     );

@@ -5,7 +5,9 @@ import { wInfo } from '../../../.storybook/utils';
 import mdPut from './put.md';
 
 import { ComponentListFactory } from '../../../src';
-import { modelPropsGen } from '../../helper';
+import { modelPropsGen, COMP_LIST } from '../../helper';
+import { list } from 'postcss';
+
 
 const { ComponentListWithStore, client } = ComponentListFactory();
 
@@ -100,7 +102,7 @@ storiesOf('API - put', module)
         </Row>
 
         <Col span={24}>
-          <ComponentListWithStore onClick={onClick} />
+          <ComponentListWithStore list={COMP_LIST} onSelectItem={onClick} />
         </Col>
       </Row>
     );

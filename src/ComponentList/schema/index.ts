@@ -51,7 +51,6 @@ export type TComponentListControlledKeys =
 // 定义被 store 控制的 model key 的列表，没法借用 ts 的能力动态从 TComponentListControlledKeys 中获取
 export const CONTROLLED_KEYS: string[] = [
   'visible',
-  'text',
   'theme',
   'styles',
 ];
@@ -63,7 +62,6 @@ export const CONTROLLED_KEYS: string[] = [
 export const ComponentListModel = types
   .model('ComponentListModel', {
     visible: types.optional(types.boolean, true),
-    text: types.optional(types.string, ''),
     _theme: types.map(types.union(types.number, types.string, types.boolean)),
     _styles: types.map(types.late((): IAnyModelType => StyleModel))
     // language: types.optional(
@@ -106,9 +104,6 @@ export const ComponentListModel = types
   })
   .actions(self => {
     return {
-      setText(text: string) {
-        self.text = text;
-      },
       setVisible(v: boolean | string) {
         self.visible = v === true || v === 'true'
       },
