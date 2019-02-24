@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import { Select, Input } from 'antd';
+import { IBaseStyledProps } from 'ide-lib-base-component';
 import { IComponentListProps } from './index';
 
-interface IStyledProps extends IComponentListProps {
-  style?: React.CSSProperties;
-  className?: string;
-  [prop: string]: any;
-}
+interface IStyledProps extends IComponentListProps, IBaseStyledProps{}
 
 export const StyledContainer = styled.div.attrs({
   style: (props: IStyledProps) => props.style || {}  // 优先级会高一些，行内样式

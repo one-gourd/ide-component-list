@@ -1,7 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Row, Col, Select, Alert  } from 'antd';
-import { ThemeProvider } from 'styled-components';
+import { pick } from 'ide-lib-utils';
+import { based, Omit, IBaseTheme, IBaseStyles, IBaseComponentProps} from 'ide-lib-base-component';
 // import useInputValue from '@rehooks/input-value';
 // import {
 //   ISchemaTreeProps,
@@ -11,7 +12,6 @@ import { ThemeProvider } from 'styled-components';
 // } from 'ide-tree';
 
 import { debugInteract, debugRender, debugModel } from '../lib/debug';
-import { pick } from '../lib/util';
 import { StyledContainer, StyledFilterWrap, StyledSelect, StyledInput, StyledGroupWrap, StyledItemWrap, StyledItemInfo, StyledItemDesc, StyledItemName, StyledItemImage } from './styles';
 import { AppFactory } from './controller/index';
 import { StoresFactory, IStoresModel } from './schema/stores';
@@ -19,9 +19,6 @@ import { TComponentListControlledKeys, CONTROLLED_KEYS } from './schema/index';
 
 const Option = Select.Option;
 
-
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
-// type OptionalProps<T, K> = T | Omit<T, K>;
 // type OptionalSchemaTreeProps = OptionalProps<
 //   ISchemaTreeProps,
 //   TSchemaTreeControlledKeys
@@ -37,17 +34,12 @@ export interface IComponentListEvent {
   onSelectItem?: (item: IComponentListItem)=>void;
 }
 
-export interface IStyles {
-  [propName: string]: React.CSSProperties;
-}
-
-export interface IComponentListStyles extends IStyles {
+export interface IComponentListStyles extends IBaseStyles {
   container?: React.CSSProperties;
 }
 
-export interface IComponentListTheme {
+export interface IComponentListTheme extends IBaseTheme {
   main: string;
-  [prop: string]: any;
 }
 
 export interface IComponentListItem {
@@ -76,7 +68,7 @@ export interface IComponentListGroup{
   };
 }
 
-export interface IComponentListProps extends IComponentListEvent{
+export interface IComponentListProps extends IComponentListEvent, IBaseComponentProps{
   // /**
   // * 子组件 schemaTree
   // */
@@ -91,16 +83,6 @@ export interface IComponentListProps extends IComponentListEvent{
    * 组件列表
    */
   list?: IComponentListGroup;
-
-  /**
-   * 样式集合，方便外部控制
-   */
-  styles?: IComponentListStyles;
-
-  /**
-   * 设置主题
-   */
-  theme?: IComponentListTheme;
 };
 
 
@@ -198,61 +180,59 @@ export const ComponentListHOC = (subComponents: ISubComponents) => {
 
   
     return (
-      <ThemeProvider theme={theme}>
-        <StyledContainer
-          style={styles.container}
-          visible={visible}
-          // ref={this.root}
-          className="ide-component-list-container"
-        >
-          
-          <StyledFilterWrap style={styles.filterWrap}>
-            <StyledSelect style={
-              styles.select
-            } className="list-select" defaultValue="" onChange={onChangeCatagory} >
-              <Option value="">全部</Option>
-              {
-                listKeys.map((cat:string) => {
-                  const curGroup = list[cat];
-                  return <Option key={cat} value={cat}>{curGroup.title}</Option>;
-                })
-              }
-            </StyledSelect>
-            <StyledInput className="list-input" style={styles.input} placeholder="搜索"  onChange={handleSearch}></StyledInput>
-          </StyledFilterWrap>
-          {
-            !props.list && <Alert message="请给组件传入 list 列表" type="error" /> || null
-          }
-          {
-            groupKeys.map(group => {
-              const curGroup = resultList[group];
-              const { list: childrenList, title } = curGroup;
-              return <StyledGroupWrap style={styles.groupWrap} key={title} className="group-wrap">
-                <h3>{title}</h3>
-                <Row>
-                  {
-                    childrenList.map((item: IComponentListItem) => {
-                      return <Col key={item.name} span={12}>
-                        <StyledItemWrap style={styles.itemWrap} href="javascript:void(0)" className="item-wrap" onClick={onSelectItem(item)}>
-                          <StyledItemInfo style={styles.itemInfo} className='item-info'>
-                            <StyledItemDesc style={styles.itemDesc} className="item-desc">{item.desc}</StyledItemDesc>
-                            <StyledItemName style={styles.itemName} className="item-name">{item.name}</StyledItemName>
-                          </StyledItemInfo>
-                          <StyledItemImage style={styles.itemImage} src={item.image} className="item-image"></StyledItemImage>
-                        </StyledItemWrap>
-                      </Col>
-                    })
-                  }
-                </Row>
-              </StyledGroupWrap>;
-            })
-          }
-        </StyledContainer>
-      </ThemeProvider>
+      <StyledContainer
+        style={styles.container}
+        visible={visible}
+        // ref={this.root}
+        className="ide-component-list-container"
+      >
+
+        <StyledFilterWrap style={styles.filterWrap}>
+          <StyledSelect style={
+            styles.select
+          } className="list-select" defaultValue="" onChange={onChangeCatagory} >
+            <Option value="">全部</Option>
+            {
+              listKeys.map((cat: string) => {
+                const curGroup = list[cat];
+                return <Option key={cat} value={cat}>{curGroup.title}</Option>;
+              })
+            }
+          </StyledSelect>
+          <StyledInput className="list-input" style={styles.input} placeholder="搜索" onChange={handleSearch}></StyledInput>
+        </StyledFilterWrap>
+        {
+          !props.list && <Alert message="请给组件传入 list 列表" type="error" /> || null
+        }
+        {
+          groupKeys.map(group => {
+            const curGroup = resultList[group];
+            const { list: childrenList, title } = curGroup;
+            return <StyledGroupWrap style={styles.groupWrap} key={title} className="group-wrap">
+              <h3>{title}</h3>
+              <Row>
+                {
+                  childrenList.map((item: IComponentListItem) => {
+                    return <Col key={item.name} span={12}>
+                      <StyledItemWrap style={styles.itemWrap} href="javascript:void(0)" className="item-wrap" onClick={onSelectItem(item)}>
+                        <StyledItemInfo style={styles.itemInfo} className='item-info'>
+                          <StyledItemDesc style={styles.itemDesc} className="item-desc">{item.desc}</StyledItemDesc>
+                          <StyledItemName style={styles.itemName} className="item-name">{item.name}</StyledItemName>
+                        </StyledItemInfo>
+                        <StyledItemImage style={styles.itemImage} src={item.image} className="item-image"></StyledItemImage>
+                      </StyledItemWrap>
+                    </Col>
+                  })
+                }
+              </Row>
+            </StyledGroupWrap>;
+          })
+        }
+      </StyledContainer>
     );
   };
   ComponentListHOC.displayName = 'ComponentListHOC';
-  return observer(ComponentListHOC);
+  return observer(based(ComponentListHOC));
 };
 
 // 采用高阶组件方式生成普通的 ComponentList 组件

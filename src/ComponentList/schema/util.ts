@@ -1,5 +1,6 @@
+import { invariant, capitalize } from 'ide-lib-utils';
+import { updateInScope, BASE_CONTROLLED_KEYS} from 'ide-lib-base-component'
 import { debugModel } from '../../lib/debug';
-import { invariant, capitalize } from '../../lib/util';
 import { IComponentListProps, IComponentListModel, ComponentListModel, IStoresModel, DEFAULT_PROPS } from '../../index';
 
 /**
@@ -29,31 +30,10 @@ export function createEmptyModel() {
 /* ----------------------------------------------------
     更新指定 enum 中的属性
 ----------------------------------------------------- */
-const update = (valueSet: string[]) => (
-  item: IComponentListModel | IStoresModel,
-  attrName: string,
-  value: any
-): boolean => {
-  invariant(!!item, '入参 item 必须存在');
-  // 如果不是可更新的属性，那么将返回 false
-  if (!valueSet.includes(attrName)) {
-    debugModel(
-      `[更新属性] 属性名 ${attrName} 不属于可更新范围，无法更新成 ${value} 值；（附:可更新属性列表：${valueSet}）`
-    );
-    return false;
-  }
-
-  const functionName = `set${capitalize(attrName)}`; // 比如 attrName 是 `type`, 则调用 `setType` 方法
-  (item as any)[functionName](value);
-  return true;
-};
-
 // 定义 menu 可更新信息的属性
-const EDITABLE_ATTRIBUTE = [
+const EDITABLE_ATTRIBUTE = BASE_CONTROLLED_KEYS.concat([
   'visible',
-  'text',
-  'theme',
-  'styles'
-];
+  'text'
+]);
 
-export const updateModelAttribute = update(EDITABLE_ATTRIBUTE);
+export const updateModelAttribute = updateInScope(EDITABLE_ATTRIBUTE);

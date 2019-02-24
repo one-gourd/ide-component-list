@@ -60,7 +60,7 @@
     "ts-import-plugin": "^1.5.5",
     "ts-jest": "^23.10.5",
     "ts-node": "^7.0.1",
-    "typescript": "^3.1.6",
+    "typescript": "3.1.6",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
@@ -68,10 +68,11 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@rehooks/input-value": "^1.0.0",
-    "debug": "^4.1.0"
+    "@rehooks/input-value": "^1.0.0"
   },
   "peerDependencies": {
+    "ide-lib-utils": "0.x",
+    "ide-lib-base-component": "0.x",
     "ette": "0.x",
     "ette-proxy": "0.x",
     "ette-router": "0.x",
