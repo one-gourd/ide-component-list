@@ -1,17 +1,18 @@
 import Router from 'ette-router';
+import { buildNormalResponse } from 'ide-lib-base-component';
+import { createModel } from 'ide-lib-engine';
 
 import { IContext } from './helper';
-import { createModel } from '../schema/util';
+import { ComponentListModel } from '../../index';
 
 export const router = new Router();
 
 // 创新新的 model 
-router.post('model', '/model', function (ctx: IContext) {
+router.post('createModel', '/model', function (ctx: IContext) {
   const { stores, request } = ctx;
   const { model } = request.data;
+  stores.setModel(createModel(ComponentListModel, model));
+  stores.model.setList(model.list || {});
 
-  stores.setModel(createModel(model));
-  // stores.setSchema(createSchemaModel(schema));
-
-  ctx.response.status = 200;
+  buildNormalResponse(ctx, 200, { success: true });
 });

@@ -11,7 +11,7 @@ npm install --save ide-component-list
 
 web 方式：
 ```html
-<script src="https://unpkg.com/ide-component-list@0.1.0/dist/index.umd.js"></script>
+<script src="https://unpkg.com/ide-component-list@0.1.2/dist/index.umd.js"></script>
 ```
 引入之后将会暴露全局变量 `ideComponentList`.
 
@@ -35,12 +35,12 @@ web 方式：
 
 首先从 git 仓库拉取代码，安装依赖项：
 ```shell
-git clone https://github.com/alibaba-paimai-frontend/ide-component-list.git
+git clone https://github.com/one-gourd/ide-component-list.git
 
 npm install
 
 ## 安装 peerDependencies 依赖包
-npm install ide-lib-utils@0.x ide-lib-base-component@0.x ette@0.x ette-proxy@0.x ette-router@0.x antd@3.x mobx@4.x mobx-react@5.x mobx-react@1.x mobx-state-tree@3.x react@16.x styled-components@4.x.x react-dom@16.x
+npm install ide-lib-utils@0.x ide-lib-base-component@0.x ide-lib-engine@0.x ette@0.x ette-proxy@0.x ette-router@0.x antd@3.x mobx@4.x mobx-react@5.x mobx-react-lite@1.x mobx-state-tree@3.10.x react@16.x styled-components@4.x.x react-dom@16.x
 ```
 
 运行以下命令后，访问 demo 地址： http://localhost:9000

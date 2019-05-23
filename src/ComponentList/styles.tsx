@@ -3,11 +3,11 @@ import { Select, Input } from 'antd';
 import { IBaseStyledProps } from 'ide-lib-base-component';
 import { IComponentListProps } from './index';
 
-interface IStyledProps extends IComponentListProps, IBaseStyledProps{}
+interface IStyledProps extends IComponentListProps, IBaseStyledProps { }
 
 export const StyledContainer = styled.div.attrs({
   style: (props: IStyledProps) => props.style || {}  // 优先级会高一些，行内样式
-})`
+})<IStyledProps>`
   display: ${(props: IStyledProps) => (props.visible ? 'block' : 'none')};
   width: 380px;
   padding: 10px;
@@ -23,26 +23,26 @@ export const StyledContainer = styled.div.attrs({
 
 export const StyledFilterWrap = styled.div.attrs({
   style: (props: IStyledProps) => props.style || {}  // 优先级会高一些，行内样式
-})`
+})<IStyledProps>`
   margin-bottom: 10px;
 `;
 
 
 export const StyledSelect = styled(Select).attrs({
   style: (props: IStyledProps) => props.style || {}  // 优先级会高一些，行内样式
-})`
+})<IStyledProps>`
    width: 175px;
 `;
 
 export const StyledInput = styled(Input).attrs({
   style: (props: IStyledProps) => props.style || {}  // 优先级会高一些，行内样式
-})`
+})<IStyledProps>`
    width: 175px;
 `;
 
 export const StyledGroupWrap = styled.div.attrs({
   style: (props: IStyledProps) => props.style || {}  // 优先级会高一些，行内样式
-})`
+})<IStyledProps>`
   border-bottom: 1px solid #e9e9e9;
   margin-bottom: 10px;
   &:last-child{
@@ -58,7 +58,7 @@ export const StyledGroupWrap = styled.div.attrs({
 
 export const StyledItemWrap = styled.a.attrs({
   style: (props: IStyledProps) => props.style || {}  // 优先级会高一些，行内样式
-})`
+})<IStyledProps>`
     display: block;
     color: rgba(0,0,0,.65);
     background-color: #f5f7f7;
