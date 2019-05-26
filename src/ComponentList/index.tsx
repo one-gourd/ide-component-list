@@ -121,16 +121,20 @@ const useFilterResult = (
       }
     };
 
-    const lowerCaseInput = inputValue.toLowerCase();
+    const lowerCaseInput = (inputValue || '').toLowerCase();
+    const regInput = new RegExp(lowerCaseInput);
     groupKeys.map((group: string) => {
       // 获取当前的 key
       const curGroup = selectedCategories[group];
       const { list: childrenList } = curGroup;
       {
         childrenList.map((item: IComponentListItem) => {
+          const lowerCaseDesc = (item.desc || '').toLowerCase();
+          const lowerCaseName = (item.name || '').toLowerCase();
+
           if (
-            new RegExp(lowerCaseInput).test(item.desc.toLowerCase()) ||
-            new RegExp(lowerCaseInput).test(item.name.toLowerCase())
+            (lowerCaseDesc && regInput.test(lowerCaseDesc.toLowerCase())) ||
+            lowerCaseName && regInput.test(lowerCaseName)
           ) {
             searchList.result.list.push(item);
           }
@@ -147,7 +151,7 @@ export const ComponentListCurrying: TComponentCurrying<
   IComponentListProps,
   ISubProps
 > = subComponents => props => {
-  const { visible, list = {}, styles, onClick, onSelectItem } = props;
+  const { visible, list = {}, styles, onSelectItem } = props;
 
   const onSelectItemCallback = useCallback(
     (item: IComponentListItem) => (

@@ -4,7 +4,7 @@ import { BASE_CONTROLLED_KEYS, JSONModel, EMPTY_JSON_SNAPSHOT  } from 'ide-lib-b
 import { IStoresModel, IModuleConfig } from 'ide-lib-engine';
 
 import { DEFAULT_PROPS, IComponentListProps } from '.';
-import { showConsole } from './solution';
+// import { showConsole } from './solution';
 
 import { subComponents, ISubProps } from './subs';
 
@@ -16,9 +16,9 @@ import { router as DelRouter } from './router/del';
 export const configComponentList: IModuleConfig<IComponentListProps, ISubProps> = {
   component: {
     className: 'ComponentList',
-    solution: {
-      onClick: [showConsole]
-    },
+    // solution: {
+    //   onClick: [showConsole]
+    // },
     defaultProps: DEFAULT_PROPS,
     children: subComponents
   },
