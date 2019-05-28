@@ -1,6 +1,6 @@
 {
   "name": "ide-component-list",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "ide component list selection",
   "main": "dist/index.umd.js",
   "module": "dist/index.umd.js",
